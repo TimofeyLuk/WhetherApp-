@@ -12,6 +12,7 @@ import UIKit
 protocol TodayForecastViewProtocol: class {
     func succes()
     func failure(error: Error)
+    var presenter: TodayForecastPresenterProtocol! {get set}
     var wetherImage: UIImageView! {get set}
     var locationTitle: UILabel {get set}
     var wetherTitle: UILabel {get set}
@@ -34,17 +35,18 @@ protocol TodayForecastPresenterProtocol: class {
 class TodayForecastPresenter: TodayForecastPresenterProtocol {
     
     weak var view: TodayForecastViewProtocol?
-    let networkService: TodayNetworkServiceProtocole!
+    var networkService: TodayNetworkServiceProtocole?
     var forecast: CurrentWeatherData?
     
     required init(view: TodayForecastViewProtocol, networkService: TodayNetworkServiceProtocole) {
         self.view = view
+        view.presenter = self
         self.networkService = networkService
         getForecast()
     }
     
     func getForecast() {
-        networkService.getCurrentWeather{ [weak self] result in
+        networkService!.getCurrentWeather{ [weak self] result in
             guard let self = self else { return }
             
             switch result {

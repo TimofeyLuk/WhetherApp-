@@ -11,6 +11,9 @@ import UIKit
 
 class TodayForecastViewController: UIViewController, TodayForecastViewProtocol {
     
+    
+    var presenter: TodayForecastPresenterProtocol!
+    
     var wetherImage: UIImageView!
     
     var locationTitle: UILabel = {
@@ -77,6 +80,7 @@ class TodayForecastViewController: UIViewController, TodayForecastViewProtocol {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = .white
         self.title = "Today"
         setupUI()
     }
@@ -91,8 +95,9 @@ class TodayForecastViewController: UIViewController, TodayForecastViewProtocol {
         let image = UIImage(named: imageName)
         wetherImage = UIImageView(image: image!)
         
-        wetherImage.frame = CGRect(x: (view.frame.width / 2) - 50, y: 40, width: 100, height: 100)
+        wetherImage.frame = CGRect(x: (view.frame.width / 2) - 50, y: view.safeAreaLayoutGuide.layoutFrame.minY + 100, width: 100, height: 100)
         view.addSubview(wetherImage)
+        
         stackView.topAnchor.constraint(equalTo: wetherImage.bottomAnchor, constant: 14).isActive = true
         stackView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
         stackView.axis = .vertical

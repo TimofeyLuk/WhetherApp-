@@ -17,6 +17,7 @@
 		440E173E2514F125002F3FB5 /* CurrentWeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440E173D2514F125002F3FB5 /* CurrentWeatherModel.swift */; };
 		440E17442515041F002F3FB5 /* NetworkServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440E17432515041F002F3FB5 /* NetworkServices.swift */; };
 		440E174625150A19002F3FB5 /* TodayForecastPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440E174525150A19002F3FB5 /* TodayForecastPresenter.swift */; };
+		441819C2251624FD00BF4320 /* ModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441819C1251624FD00BF4320 /* ModuleBuilder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		440E173D2514F125002F3FB5 /* CurrentWeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherModel.swift; sourceTree = "<group>"; };
 		440E17432515041F002F3FB5 /* NetworkServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServices.swift; sourceTree = "<group>"; };
 		440E174525150A19002F3FB5 /* TodayForecastPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayForecastPresenter.swift; sourceTree = "<group>"; };
+		441819C1251624FD00BF4320 /* ModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleBuilder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 		440E1723251473AC002F3FB5 /* WeatherApp */ = {
 			isa = PBXGroup;
 			children = (
+				441819C1251624FD00BF4320 /* ModuleBuilder.swift */,
 				440E173F2514F86A002F3FB5 /* Services */,
 				440E17392514740A002F3FB5 /* TodayModule */,
 				440E173A25147424002F3FB5 /* WeekModule */,
@@ -201,6 +204,7 @@
 				440E1729251473AC002F3FB5 /* TodayForecastViewController.swift in Sources */,
 				440E1725251473AC002F3FB5 /* AppDelegate.swift in Sources */,
 				440E173C25148A3D002F3FB5 /* LocationService.swift in Sources */,
+				441819C2251624FD00BF4320 /* ModuleBuilder.swift in Sources */,
 				440E173E2514F125002F3FB5 /* CurrentWeatherModel.swift in Sources */,
 				440E17442515041F002F3FB5 /* NetworkServices.swift in Sources */,
 				440E174625150A19002F3FB5 /* TodayForecastPresenter.swift in Sources */,
