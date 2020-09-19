@@ -9,9 +9,15 @@
 import MapKit
 import CoreLocation
 
+protocol UpdateDelegateProtocol: class {
+    func lokationDidUpdate()
+}
+
+
 protocol LocationServiceProtocol {
     var currentLat: Int {get}
     var currentLong: Int {get}
+    var delegate: UpdateDelegateProtocol? {get set}
 }
 
 
@@ -19,6 +25,7 @@ class CurrentLokationTaker: NSObject,LocationServiceProtocol,  CLLocationManager
     
     var currentLat: Int = 0
     var currentLong: Int = 0
+    weak var delegate: UpdateDelegateProtocol?
     
     var locationManager = CLLocationManager()
     
@@ -26,6 +33,7 @@ class CurrentLokationTaker: NSObject,LocationServiceProtocol,  CLLocationManager
         super.init()
         locationManager.requestAlwaysAuthorization()
         locationManager.requestWhenInUseAuthorization()
+        locationManager.distanceFilter = 6000
         if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
@@ -37,7 +45,7 @@ class CurrentLokationTaker: NSObject,LocationServiceProtocol,  CLLocationManager
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
         currentLat = Int(locValue.latitude)
         currentLong = Int(locValue.longitude)
-        print("locations = \(locValue.latitude) \(locValue.longitude)")
+        delegate?.lokationDidUpdate()
     }
    
 }

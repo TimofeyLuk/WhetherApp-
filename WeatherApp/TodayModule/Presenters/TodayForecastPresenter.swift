@@ -12,15 +12,9 @@ import UIKit
 protocol TodayForecastViewProtocol: class {
     func succes()
     func failure(error: Error)
+    func ImageSucces(image: UIImage?)
+    func ImageFailure(error: Error)
     var presenter: TodayForecastPresenterProtocol! {get set}
-    var wetherImage: UIImageView! {get set}
-    var locationTitle: UILabel {get set}
-    var wetherTitle: UILabel {get set}
-    var pressureLabel: UILabel {get set}
-    var humidityLabel: UILabel {get set}
-    var cLabel: UILabel {get set}
-    var windSpeedLabel: UILabel {get set}
-    var SELabel: UILabel {get set}
 }
 
 
@@ -32,7 +26,7 @@ protocol TodayForecastPresenterProtocol: class {
 }
 
 
-class TodayForecastPresenter: TodayForecastPresenterProtocol {
+class TodayForecastPresenter: TodayForecastPresenterProtocol, UpdateDelegateProtocol{
     
     weak var view: TodayForecastViewProtocol?
     var networkService: TodayNetworkServiceProtocole?
@@ -42,24 +36,45 @@ class TodayForecastPresenter: TodayForecastPresenterProtocol {
         self.view = view
         view.presenter = self
         self.networkService = networkService
+        self.networkService?.currentLocation.delegate = self
         getForecast()
     }
     
     func getForecast() {
         networkService!.getCurrentWeather{ [weak self] result in
             guard let self = self else { return }
-            
-            switch result {
-            case .success(let forecast):
-                self.forecast = forecast
-                self.view?.succes()
-            case .failure(let error):
-                self.view?.failure(error: error)
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let forecast):
+                    self.forecast = forecast
+                    self.view?.succes()
+                    if let image = forecast?.weather?.first?.icon {
+                        self.getImage(imageIndex: image)
+                    }
+                case .failure(let error):
+                    self.view?.failure(error: error)
+                }
             }
         }
     }
     
+    func getImage(imageIndex: String) {
+        networkService!.getWeatheImage(imageIndex: imageIndex, completion:{ [weak self] result in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let image):
+                    self.view?.ImageSucces(image: image)
+                case .failure(let error):
+                    self.view?.failure(error: error)
+                }
+            }
+        })
+    }
     
+    func lokationDidUpdate() {
+        getForecast()
+    }
     
     
 }

@@ -6,19 +6,21 @@
 //  Copyright © 2020 Тимофей Лукашевич. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 
 protocol TodayNetworkServiceProtocole {
     var currentLocation: LocationServiceProtocol! { get set }
     func getCurrentWeather (completion: @escaping(Result<CurrentWeatherData?, Error>) -> Void)
+    func getWeatheImage ( imageIndex: String, completion: @escaping (Result<UIImage?, Error>) -> Void)
     init(location: LocationServiceProtocol)
 }
 
 // MARK: - first presenter netservice (Today)
 
 class TodayNetworkService: TodayNetworkServiceProtocole {
-
+    
+    
     required init(location: LocationServiceProtocol) {
         self.currentLocation = location
     }
@@ -26,7 +28,7 @@ class TodayNetworkService: TodayNetworkServiceProtocole {
     var currentLocation: LocationServiceProtocol!
     func getCurrentWeather(completion: @escaping (Result<CurrentWeatherData?, Error>) -> Void) {
         let urlString =
-        "api.openweathermap.org/data/2.5/weather?lat=\(currentLocation.currentLat)&lon=\(currentLocation.currentLong)&units=metric&appid=a5fbd45eb862a80d161c5fb8d6c86008"
+        "https://api.openweathermap.org/data/2.5/weather?lat=\(currentLocation.currentLat)&lon=\(currentLocation.currentLong)&units=metric&appid=a5fbd45eb862a80d161c5fb8d6c86008"
         
         guard let url =  URL(string: urlString) else { return }
         
@@ -45,12 +47,24 @@ class TodayNetworkService: TodayNetworkServiceProtocole {
         }.resume()
         
     }
-}
-
-// MARK: - second presenter netservice (Week)
-
-class WeekNetworkService {
+    
+    func getWeatheImage( imageIndex: String, completion: @escaping (Result<UIImage?, Error>) -> Void) {
+        let urlString = "https://openweathermap.org/img/wn/\(imageIndex)@2x.png"
+        guard let url =  URL(string: urlString) else { return }
+        URLSession.shared.dataTask(with: url) { (data, responce, error) in
+            if let error = error, data == nil {
+                completion(.failure(error))
+                return
+            }
+            
+            let image = UIImage(data: data!)
+            completion(.success(image))
+            
+        }.resume()
+    }
     
     
     
 }
+
+

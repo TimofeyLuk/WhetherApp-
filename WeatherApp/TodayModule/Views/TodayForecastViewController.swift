@@ -11,7 +11,6 @@ import UIKit
 
 class TodayForecastViewController: UIViewController, TodayForecastViewProtocol {
     
-    
     var presenter: TodayForecastPresenterProtocol!
     
     var wetherImage: UIImageView!
@@ -32,8 +31,8 @@ class TodayForecastViewController: UIViewController, TodayForecastViewProtocol {
         return wether
     }()
     
-    private var pressureImage: UIImageView!
-    var pressureLabel: UILabel = {
+    private var cloudinessImage: UIImageView!
+    var cloudinessLabel: UILabel = {
         let pressure = UILabel()
         pressure.translatesAutoresizingMaskIntoConstraints = false
         pressure.font = UIFont.systemFont(ofSize: 10)
@@ -50,8 +49,8 @@ class TodayForecastViewController: UIViewController, TodayForecastViewProtocol {
         return humidity
     }()
     
-    private var cImage: UIImageView!
-    var cLabel: UILabel = {
+    private var pressureImage: UIImageView!
+    var pressureLabel: UILabel = {
         let c = UILabel()
         c.translatesAutoresizingMaskIntoConstraints = false
         c.font = UIFont.systemFont(ofSize: 10)
@@ -95,7 +94,7 @@ class TodayForecastViewController: UIViewController, TodayForecastViewProtocol {
         let image = UIImage(named: imageName)
         wetherImage = UIImageView(image: image!)
         
-        wetherImage.frame = CGRect(x: (view.frame.width / 2) - 50, y: view.safeAreaLayoutGuide.layoutFrame.minY + 100, width: 100, height: 100)
+        wetherImage.frame = CGRect(x: (view.frame.width / 2) - 50, y: 100, width: 100, height: 100)
         view.addSubview(wetherImage)
         
         stackView.topAnchor.constraint(equalTo: wetherImage.bottomAnchor, constant: 14).isActive = true
@@ -108,17 +107,17 @@ class TodayForecastViewController: UIViewController, TodayForecastViewProtocol {
         
         
         drawHorizontalLine(topView: stackView, goDownConstant: 30)
-        setImages(goDownConstant: 300)
+        setImages(goDownConstant: 320)
         
-        drawHorizontalLine(topView: pressureImage, goDownConstant: 100)
+        drawHorizontalLine(topView: cloudinessImage, goDownConstant: 100)
         
         let shareButton = UIButton()
         shareButton.setTitleColor(.orange, for: .normal)
         shareButton.setTitle("Share", for: .normal)
         shareButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(shareButton)
-        shareButton.topAnchor.constraint(equalTo: pressureImage.bottomAnchor, constant: 140).isActive = true
-        shareButton.centerXAnchor.constraint(equalTo: pressureImage.centerXAnchor).isActive = true
+        shareButton.topAnchor.constraint(equalTo: cloudinessImage.bottomAnchor, constant: 140).isActive = true
+        shareButton.centerXAnchor.constraint(equalTo: cloudinessImage.centerXAnchor).isActive = true
         shareButton.widthAnchor.constraint(equalToConstant: 200).isActive = true
         shareButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
         
@@ -137,27 +136,27 @@ class TodayForecastViewController: UIViewController, TodayForecastViewProtocol {
     
     
     func setImages(goDownConstant: CGFloat) {
-        let pressure = UIImage(named: "pressure")
+        let cloudiness = UIImage(named: "cloudiness")
         let humidity = UIImage(named: "humidity")
-        let c = UIImage(named: "C")
+        let pressure = UIImage(named: "pressure")
         let windSpeed = UIImage(named: "windSpeed")
         let SE = UIImage(named: "SE")
         
         
-        pressureImage = UIImageView(image: pressure)
+        cloudinessImage = UIImageView(image: cloudiness)
         humidityImage = UIImageView(image: humidity)
-        cImage = UIImageView(image: c)
+        pressureImage = UIImageView(image: pressure)
         windSpeedImage = UIImageView(image: windSpeed)
         SEImage = UIImageView(image: SE)
         
-        pressureImage.frame = CGRect(x: (view.frame.width / 2 - 10), y: goDownConstant, width: 20, height: 20)
-        pressureLabel.text = "%"
+        cloudinessImage.frame = CGRect(x: (view.frame.width / 2 - 10), y: goDownConstant, width: 20, height: 20)
+        cloudinessLabel.text = "%"
         
         humidityImage.frame = CGRect(x: (view.frame.width / 2 - 80), y: goDownConstant, width: 20, height: 20)
         humidityLabel.text = "mm"
         
-        cImage.frame = CGRect(x: (view.frame.width / 2 + 60), y: goDownConstant, width: 20, height: 20)
-        cLabel.text = "hPa"
+        pressureImage.frame = CGRect(x: (view.frame.width / 2 + 60), y: goDownConstant, width: 20, height: 20)
+        pressureLabel.text = "hPa"
         
         windSpeedImage.frame = CGRect(x: (view.frame.width / 2 - 50), y: goDownConstant + 60, width: 20, height: 20)
         windSpeedLabel.text = "km/h"
@@ -165,26 +164,26 @@ class TodayForecastViewController: UIViewController, TodayForecastViewProtocol {
         SEImage.frame = CGRect(x: (view.frame.width / 2 + 40), y: goDownConstant + 62, width: 20, height: 20)
         SELabel.text = "--"
         
-        view.addSubview(pressureImage)
+        view.addSubview(cloudinessImage)
         view.addSubview(humidityImage)
-        view.addSubview(cImage)
+        view.addSubview(pressureImage)
         view.addSubview(windSpeedImage)
         view.addSubview(SEImage)
         
-        view.addSubview(pressureLabel)
+        view.addSubview(cloudinessLabel)
         view.addSubview(humidityLabel)
-        view.addSubview(cLabel)
+        view.addSubview(pressureLabel)
         view.addSubview(windSpeedLabel)
         view.addSubview(SELabel)
         
-        pressureLabel.topAnchor.constraint(equalTo: pressureImage.bottomAnchor, constant: 2).isActive = true
-        pressureLabel.centerXAnchor.constraint(equalTo: pressureImage.centerXAnchor).isActive = true
+        cloudinessLabel.topAnchor.constraint(equalTo: cloudinessImage.bottomAnchor, constant: 2).isActive = true
+        cloudinessLabel.centerXAnchor.constraint(equalTo: cloudinessImage.centerXAnchor).isActive = true
         
         humidityLabel.topAnchor.constraint(equalTo: humidityImage.bottomAnchor, constant: 2).isActive = true
         humidityLabel.centerXAnchor.constraint(equalTo: humidityImage.centerXAnchor).isActive = true
         
-        cLabel.topAnchor.constraint(equalTo: cImage.bottomAnchor, constant: 2).isActive = true
-        cLabel.centerXAnchor.constraint(equalTo: cImage.centerXAnchor).isActive = true
+        pressureLabel.topAnchor.constraint(equalTo: pressureImage.bottomAnchor, constant: 2).isActive = true
+        pressureLabel.centerXAnchor.constraint(equalTo: pressureImage.centerXAnchor).isActive = true
         
         windSpeedLabel.topAnchor.constraint(equalTo: windSpeedImage.bottomAnchor, constant: 2).isActive = true
         windSpeedLabel.centerXAnchor.constraint(equalTo: windSpeedImage.centerXAnchor).isActive = true
@@ -194,11 +193,64 @@ class TodayForecastViewController: UIViewController, TodayForecastViewProtocol {
     }
     
     func succes() {
+        guard let forecast = presenter.forecast else {return}
         
+        wetherTitle.text = "\(forecast.main?.temp ?? 0)°C | " + (forecast.weather?.first?.main ?? "Error")
+        locationTitle.text = (forecast.name ?? "Error") + ", " + (forecast.sys?.country ?? "ER")
+        
+        pressureLabel.text = "\(forecast.main?.pressure ?? 0) hPa"
+        humidityLabel.text = "\(forecast.main?.humidity ?? 0) mm"
+        cloudinessLabel.text = "\(forecast.clouds?.all ?? 0) %"
+        windSpeedLabel.text = "\(forecast.wind?.speed ?? 0) km/h"
+        SELabel.text = forecast.wind?.deg?.compasDirection ?? "--"
     }
     
     func failure(error: Error) {
-        
+        print(error)
     }
+    
+    func ImageSucces(image: UIImage?) {
+        if image != nil {
+            if  wetherImage == nil {
+                wetherImage = UIImageView(image: image!)
+                wetherImage.frame = CGRect(x: (view.frame.width / 2) - 50, y: 100, width: 100, height: 100)
+                view.addSubview(wetherImage)
+            } else {
+                wetherImage.image = image!
+            }
+        }
+    }
+    
+    func ImageFailure(error: Error) {
+        print(error)
+    }
+    
+    
+    
 }
 
+
+extension Int {
+    var compasDirection: String {
+        switch self {
+        case 0...15, 345...360:
+            return "N"
+        case 16...74:
+            return "NE"
+        case 75...105:
+            return "E"
+        case 106...164:
+            return "SE"
+        case 165...195:
+            return "S"
+        case 196...254:
+            return "SW"
+        case 255...285:
+            return "W"
+        case 286...344:
+            return "NW"
+        default:
+            return "--"
+        }
+    }
+}
