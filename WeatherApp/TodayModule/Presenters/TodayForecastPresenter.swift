@@ -6,12 +6,20 @@
 //  Copyright © 2020 Тимофей Лукашевич. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 
 protocol TodayForecastViewProtocol: class {
     func succes()
     func failure(error: Error)
+    var wetherImage: UIImageView! {get set}
+    var locationTitle: UILabel {get set}
+    var wetherTitle: UILabel {get set}
+    var pressureLabel: UILabel {get set}
+    var humidityLabel: UILabel {get set}
+    var cLabel: UILabel {get set}
+    var windSpeedLabel: UILabel {get set}
+    var SELabel: UILabel {get set}
 }
 
 

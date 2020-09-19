@@ -12,9 +12,24 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
-
+    var window: UIWindow?
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        
+        let todayForecastNetworkService = TodayNetworkService(location: CurrentLokationTaker())
+        let todayForecastVC = TodayForecastPresenter(view: TodayForecastViewController(), networkService: todayForecastNetworkService)
+        
+        let weekForecastNetworkService = TodayNetworkService(location: CurrentLokationTaker())
+        let weekForecastVC = TodayForecastPresenter(view: TodayForecastViewController(), networkService: weekForecastNetworkService)
+        
+        let tabBarVC = UITabBarController()
+        tabBarVC.setViewControllers(([todayForecastVC.view, weekForecastVC.view] as! [UIViewController]), animated: true)
+        
+        self.window?.rootViewController = tabBarVC
+        self.window?.makeKeyAndVisible()
+        
         return true
     }
 
