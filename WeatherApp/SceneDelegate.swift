@@ -24,12 +24,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let todayForecastVC = ModuleBuilder.createTodayForecastModule()
         let todayNavBar = UINavigationController(rootViewController: todayForecastVC)
         
-        let weekForecastVC = ModuleBuilder.createTodayForecastModule()
+        let weekForecastVC = ModuleBuilder.createWeekForecastModule()
         let weekNavBar = UINavigationController(rootViewController: weekForecastVC)
         
         tabBarVC.setViewControllers([todayNavBar, weekNavBar], animated: true)
+        let image = UIImage(named: "forecast")
+        let tabBarItem = UITabBarItem(title: "Forecast", image: image?.withTintColor(.gray), selectedImage: image?.withTintColor(.blue))
+        tabBarVC.customizableViewControllers![1].tabBarItem = tabBarItem
         window?.rootViewController = tabBarVC
         window?.makeKeyAndVisible()
+
+        
 
     }
 

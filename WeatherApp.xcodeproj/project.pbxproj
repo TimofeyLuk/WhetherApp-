@@ -15,9 +15,14 @@
 		440E1731251473AF002F3FB5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 440E172F251473AF002F3FB5 /* LaunchScreen.storyboard */; };
 		440E173C25148A3D002F3FB5 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440E173B25148A3D002F3FB5 /* LocationService.swift */; };
 		440E173E2514F125002F3FB5 /* CurrentWeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440E173D2514F125002F3FB5 /* CurrentWeatherModel.swift */; };
-		440E17442515041F002F3FB5 /* NetworkServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440E17432515041F002F3FB5 /* NetworkServices.swift */; };
+		440E17442515041F002F3FB5 /* TodayNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440E17432515041F002F3FB5 /* TodayNetworkService.swift */; };
 		440E174625150A19002F3FB5 /* TodayForecastPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440E174525150A19002F3FB5 /* TodayForecastPresenter.swift */; };
 		441819C2251624FD00BF4320 /* ModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441819C1251624FD00BF4320 /* ModuleBuilder.swift */; };
+		441819C7251743F500BF4320 /* WeekForecastModelsForJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441819C6251743F500BF4320 /* WeekForecastModelsForJSON.swift */; };
+		441819C925174F4500BF4320 /* WeekForecastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441819C825174F4500BF4320 /* WeekForecastViewModel.swift */; };
+		441819CB25175B5A00BF4320 /* WeekForecastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441819CA25175B5A00BF4320 /* WeekForecastViewController.swift */; };
+		441819CD2517601800BF4320 /* WeekNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441819CC2517601800BF4320 /* WeekNetworkService.swift */; };
+		441819CF2517666D00BF4320 /* WeekForecastPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441819CE2517666D00BF4320 /* WeekForecastPresenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,9 +36,14 @@
 		440E1732251473AF002F3FB5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		440E173B25148A3D002F3FB5 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		440E173D2514F125002F3FB5 /* CurrentWeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherModel.swift; sourceTree = "<group>"; };
-		440E17432515041F002F3FB5 /* NetworkServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServices.swift; sourceTree = "<group>"; };
+		440E17432515041F002F3FB5 /* TodayNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayNetworkService.swift; sourceTree = "<group>"; };
 		440E174525150A19002F3FB5 /* TodayForecastPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayForecastPresenter.swift; sourceTree = "<group>"; };
 		441819C1251624FD00BF4320 /* ModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleBuilder.swift; sourceTree = "<group>"; };
+		441819C6251743F500BF4320 /* WeekForecastModelsForJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekForecastModelsForJSON.swift; sourceTree = "<group>"; };
+		441819C825174F4500BF4320 /* WeekForecastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekForecastViewModel.swift; sourceTree = "<group>"; };
+		441819CA25175B5A00BF4320 /* WeekForecastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekForecastViewController.swift; sourceTree = "<group>"; };
+		441819CC2517601800BF4320 /* WeekNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekNetworkService.swift; sourceTree = "<group>"; };
+		441819CE2517666D00BF4320 /* WeekForecastPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekForecastPresenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +103,9 @@
 		440E173A25147424002F3FB5 /* WeekModule */ = {
 			isa = PBXGroup;
 			children = (
+				441819C3251742DD00BF4320 /* Presenters */,
+				441819C52517431D00BF4320 /* Models */,
+				441819C42517430500BF4320 /* Views */,
 			);
 			path = WeekModule;
 			sourceTree = "<group>";
@@ -101,7 +114,8 @@
 			isa = PBXGroup;
 			children = (
 				440E173B25148A3D002F3FB5 /* LocationService.swift */,
-				440E17432515041F002F3FB5 /* NetworkServices.swift */,
+				440E17432515041F002F3FB5 /* TodayNetworkService.swift */,
+				441819CC2517601800BF4320 /* WeekNetworkService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -128,6 +142,31 @@
 				440E174525150A19002F3FB5 /* TodayForecastPresenter.swift */,
 			);
 			path = Presenters;
+			sourceTree = "<group>";
+		};
+		441819C3251742DD00BF4320 /* Presenters */ = {
+			isa = PBXGroup;
+			children = (
+				441819CE2517666D00BF4320 /* WeekForecastPresenter.swift */,
+			);
+			path = Presenters;
+			sourceTree = "<group>";
+		};
+		441819C42517430500BF4320 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				441819CA25175B5A00BF4320 /* WeekForecastViewController.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		441819C52517431D00BF4320 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				441819C6251743F500BF4320 /* WeekForecastModelsForJSON.swift */,
+				441819C825174F4500BF4320 /* WeekForecastViewModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -202,12 +241,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				440E1729251473AC002F3FB5 /* TodayForecastViewController.swift in Sources */,
+				441819CB25175B5A00BF4320 /* WeekForecastViewController.swift in Sources */,
 				440E1725251473AC002F3FB5 /* AppDelegate.swift in Sources */,
 				440E173C25148A3D002F3FB5 /* LocationService.swift in Sources */,
+				441819CF2517666D00BF4320 /* WeekForecastPresenter.swift in Sources */,
 				441819C2251624FD00BF4320 /* ModuleBuilder.swift in Sources */,
 				440E173E2514F125002F3FB5 /* CurrentWeatherModel.swift in Sources */,
-				440E17442515041F002F3FB5 /* NetworkServices.swift in Sources */,
+				441819CD2517601800BF4320 /* WeekNetworkService.swift in Sources */,
+				441819C925174F4500BF4320 /* WeekForecastViewModel.swift in Sources */,
+				440E17442515041F002F3FB5 /* TodayNetworkService.swift in Sources */,
 				440E174625150A19002F3FB5 /* TodayForecastPresenter.swift in Sources */,
+				441819C7251743F500BF4320 /* WeekForecastModelsForJSON.swift in Sources */,
 				440E1727251473AC002F3FB5 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

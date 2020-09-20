@@ -81,6 +81,10 @@ class TodayForecastViewController: UIViewController, TodayForecastViewProtocol {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         self.title = "Today"
+        let tabBarImage = UIImage(named: "today_img")
+        
+        let tabBarItem = UITabBarItem(title: "Today", image: tabBarImage?.withTintColor(.gray), selectedImage: tabBarImage?.withTintColor(.blue))
+        self.tabBarItem = tabBarItem
         setupUI()
     }
     
@@ -195,7 +199,7 @@ class TodayForecastViewController: UIViewController, TodayForecastViewProtocol {
     func succes() {
         guard let forecast = presenter.forecast else {return}
         
-        wetherTitle.text = "\(forecast.main?.temp ?? 0)°C | " + (forecast.weather?.first?.main ?? "Error")
+        wetherTitle.text = "\(Int(forecast.main?.temp ?? 0))°C | " + (forecast.weather?.first?.main ?? "Error")
         locationTitle.text = (forecast.name ?? "Error") + ", " + (forecast.sys?.country ?? "ER")
         
         pressureLabel.text = "\(forecast.main?.pressure ?? 0) hPa"

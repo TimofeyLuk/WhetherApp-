@@ -10,15 +10,27 @@ import UIKit
 
 protocol Builder {
     static func createTodayForecastModule() -> UIViewController
+    static func createWeekForecastModule() -> UIViewController
 }
 
 class ModuleBuilder: Builder {
+    
+    static let location = CurrentLokationTaker()
+    
     static func createTodayForecastModule() -> UIViewController {
-        let location = CurrentLokationTaker()
-        let serviceForModel = TodayNetworkService(location: location)
+        let serviceForModel = TodayNetworkService(location: ModuleBuilder.location)
         let view = TodayForecastViewController()
         
         _ = TodayForecastPresenter(view: view, networkService: serviceForModel)
+        
+        return view
+    }
+    
+    static func createWeekForecastModule() -> UIViewController {
+        let networkService = WeekNetworkService(location: ModuleBuilder.location)
+        let view = WeekForecastViewController()
+        
+        _ = WeekForecastPresenter(view: view, networkService: networkService)
         
         return view
     }
