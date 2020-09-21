@@ -21,9 +21,9 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Для определения местоположения</string>
+	<string>To determine the location</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Для определения местоположения</string>
+	<string>To determine the location</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

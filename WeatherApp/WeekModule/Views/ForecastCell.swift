@@ -67,10 +67,20 @@ class ForecastCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
     }
     
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        if highlighted {
+            self.backgroundColor = .white
+            self.layer.borderWidth = 2
+            self.layer.borderColor = UIColor.blue.cgColor
+        } else {
+            self.backgroundColor = .white
+            self.layer.borderWidth = 0
+            self.layer.borderColor = UIColor.white.cgColor
+        }
+    }
     
 
 }

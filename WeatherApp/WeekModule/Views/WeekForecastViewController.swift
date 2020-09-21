@@ -90,14 +90,15 @@ class WeekForecastViewController: UIViewController, UITableViewDelegate, UITable
         }
         return cell
     }
-    
+        
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
         cell?.backgroundColor = .white
         cell?.layer.borderWidth = 2
         cell?.layer.borderColor = UIColor.blue.cgColor
     }
-    
+
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
         cell?.backgroundColor = .white
