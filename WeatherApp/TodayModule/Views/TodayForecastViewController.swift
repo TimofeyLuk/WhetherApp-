@@ -104,9 +104,9 @@ class TodayForecastViewController: UIViewController, TodayForecastViewProtocol {
         stackView.topAnchor.constraint(equalTo: wetherImage.bottomAnchor, constant: 14).isActive = true
         stackView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
         stackView.axis = .vertical
-        locationTitle.text = "Error,ER"
+        locationTitle.text = "-----, --"
         stackView.addArrangedSubview(locationTitle)
-        wetherTitle.text = "00ºC | Error"
+        wetherTitle.text = "00ºC | -----"
         stackView.addArrangedSubview(wetherTitle)
         
         
@@ -119,12 +119,17 @@ class TodayForecastViewController: UIViewController, TodayForecastViewProtocol {
         shareButton.setTitleColor(.orange, for: .normal)
         shareButton.setTitle("Share", for: .normal)
         shareButton.translatesAutoresizingMaskIntoConstraints = false
+        shareButton.addTarget(self, action: #selector(shareAction), for: UIControl.Event.touchUpInside)
         view.addSubview(shareButton)
         shareButton.topAnchor.constraint(equalTo: cloudinessImage.bottomAnchor, constant: 140).isActive = true
         shareButton.centerXAnchor.constraint(equalTo: cloudinessImage.centerXAnchor).isActive = true
         shareButton.widthAnchor.constraint(equalToConstant: 200).isActive = true
         shareButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
         
+    }
+    
+    @objc func shareAction(sender:UIButton) {
+        presenter.shareForecast()
     }
 
     func drawHorizontalLine(topView: UIView, goDownConstant: CGFloat) {

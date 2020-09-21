@@ -6,12 +6,13 @@
 //  Copyright © 2020 Тимофей Лукашевич. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class Forecast {
     
     var city: City?
     var data: [String:[ForecastElement]?]?
+    var images: [String: UIImage]?
     
     init(forecast: WeekForecast) {
         city = forecast.city
@@ -22,7 +23,7 @@ class Forecast {
                     
                     let dateRange = dataTimeStr.startIndex...dataTimeStr.firstIndex(of: " ")!
                     
-                    let timeRange = dataTimeStr.index(after: dataTimeStr.firstIndex(of: " ")!)...dataTimeStr.index(dataTimeStr.firstIndex(of: " ")!, offsetBy: 2)
+                    let timeRange = dataTimeStr.index(after: dataTimeStr.firstIndex(of: " ")!)...dataTimeStr.index(dataTimeStr.firstIndex(of: " ")!, offsetBy: 5)
                     
                     let dataString = String(dataTimeStr[dateRange])
                     let timeString = String(dataTimeStr[timeRange])

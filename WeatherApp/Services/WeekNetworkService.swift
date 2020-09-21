@@ -11,13 +11,12 @@ import UIKit
 protocol WeekNetworkServiceProtocol: class {
     var currentLocation: LocationServiceProtocol! { get set }
     func getWeekWeather (completion: @escaping(Result<WeekForecast?, Error>) -> Void)
-    //func getWeekWeatheImage ( imageIndex: String, completion: @escaping (Result<UIImage?, Error>) -> Void)
+    func getWeekWeatheImage ( imageIndex: String, completion: @escaping (Result<UIImage?, Error>) -> Void)
     init(location: LocationServiceProtocol)
 }
 
 
 class WeekNetworkService: WeekNetworkServiceProtocol {
-    
     var currentLocation: LocationServiceProtocol!
     
     required init(location: LocationServiceProtocol) {
@@ -42,8 +41,21 @@ class WeekNetworkService: WeekNetworkServiceProtocol {
                 completion(.failure(error))
             }
         }.resume()
-        
     }
     
-    
+    func getWeekWeatheImage(imageIndex: String, completion: @escaping (Result<UIImage?, Error>) -> Void) {
+        let urlString = "https://openweathermap.org/img/wn/\(imageIndex)@2x.png"
+        guard let url =  URL(string: urlString) else { return }
+        URLSession.shared.dataTask(with: url) { (data, responce, error) in
+            if let error = error, data == nil {
+                completion(.failure(error))
+                return
+            }
+            
+            let image = UIImage(data: data!)
+            completion(.success(image))
+            
+        }.resume()
+    }
+           
 }

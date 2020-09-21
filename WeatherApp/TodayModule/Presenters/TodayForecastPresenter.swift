@@ -23,6 +23,7 @@ protocol TodayForecastPresenterProtocol: class {
     init(view: TodayForecastViewProtocol, networkService: TodayNetworkServiceProtocole)
     func getForecast()
     var forecast: CurrentWeatherData? { get set }
+    func shareForecast()
 }
 
 
@@ -70,6 +71,18 @@ class TodayForecastPresenter: TodayForecastPresenterProtocol, UpdateDelegateProt
                 }
             }
         })
+    }
+    
+    func shareForecast() {
+        if forecast != nil {
+            let message = "Forecaast for today: weather: \(forecast?.weather?.first?.description ?? "---"), \n temp: \(Int(forecast?.main?.temp_min ?? 0))-\(Int(forecast?.main?.temp_max ?? 0))°C,\n pressure: \(forecast?.main?.pressure ?? 0)hPa,\n humidity: \(forecast?.main?.humidity ?? 0)mm"
+            
+            print(message)
+            
+            let avc = UIActivityViewController(activityItems: [message], applicationActivities: nil)
+            let vc = view as! UIViewController
+            vc.present(avc, animated: true, completion: nil)
+        }
     }
     
     func lokationDidUpdate() {
