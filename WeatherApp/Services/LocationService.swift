@@ -17,7 +17,7 @@ protocol UpdateDelegateProtocol: class {
 protocol LocationServiceProtocol {
     var currentLat: Int {get}
     var currentLong: Int {get}
-    var delegate: UpdateDelegateProtocol? {get set}
+    var delegates: [UpdateDelegateProtocol] {get set}
 }
 
 
@@ -25,7 +25,7 @@ class CurrentLokationTaker: NSObject,LocationServiceProtocol,  CLLocationManager
     
     var currentLat: Int = 0
     var currentLong: Int = 0
-    weak var delegate: UpdateDelegateProtocol?
+    var delegates: [UpdateDelegateProtocol] = []
     
     var locationManager = CLLocationManager()
     
@@ -45,7 +45,9 @@ class CurrentLokationTaker: NSObject,LocationServiceProtocol,  CLLocationManager
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
         currentLat = Int(locValue.latitude)
         currentLong = Int(locValue.longitude)
-        delegate?.lokationDidUpdate()
+        for delegate in delegates {
+            delegate.lokationDidUpdate()
+        }
     }
    
 }

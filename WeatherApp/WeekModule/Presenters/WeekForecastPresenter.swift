@@ -36,7 +36,7 @@ class WeekForecastPresenter: WeekForecastPresenterProtocol, UpdateDelegateProtoc
         self.view = view
         view.presenter = self
         self.networkService = networkService
-        self.networkService?.currentLocation.delegate = self
+        self.networkService?.currentLocation.delegates.append(self)
         getForecast()
     }
     
@@ -92,7 +92,7 @@ class WeekForecastPresenter: WeekForecastPresenterProtocol, UpdateDelegateProtoc
     }
     
     func lokationDidUpdate() {
-        
+        getForecast()
     }
        
     

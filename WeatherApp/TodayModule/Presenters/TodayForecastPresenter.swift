@@ -37,7 +37,7 @@ class TodayForecastPresenter: TodayForecastPresenterProtocol, UpdateDelegateProt
         self.view = view
         view.presenter = self
         self.networkService = networkService
-        self.networkService?.currentLocation.delegate = self
+        self.networkService?.currentLocation.delegates.append(self)
         getForecast()
     }
     
