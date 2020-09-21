@@ -112,6 +112,14 @@ class WeekForecastViewController: UIViewController, UITableViewDelegate, UITable
     
     func failure(error: Error) {
         print(error.localizedDescription)
+        let errorMessage = UIAlertController(title: "Connection error", message: "Please connect to the Internet and restart the application", preferredStyle: .alert)
+        let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
+            exit(1)
+         })
+        
+        errorMessage.addAction(ok)
+
+        self.present(errorMessage, animated: true, completion: nil)
     }
     
     func ImageSucces() {
@@ -120,6 +128,12 @@ class WeekForecastViewController: UIViewController, UITableViewDelegate, UITable
     
     func ImageFailure(error: Error) {
          print(error.localizedDescription)
+         let errorMessage = UIAlertController(title: "Connection error", message: "the program was unable to obtain images", preferredStyle: .alert)
+         let ok = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+         
+         errorMessage.addAction(ok)
+
+         self.present(errorMessage, animated: true, completion: nil)
     }
     
     
