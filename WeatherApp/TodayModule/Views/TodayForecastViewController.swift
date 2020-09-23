@@ -13,7 +13,12 @@ class TodayForecastViewController: UIViewController, TodayForecastViewProtocol {
     
     var presenter: TodayForecastPresenterProtocol!
     
-    var wetherImage: UIImageView!
+    var wetherImage: UIImageView = {
+        let img = UIImageView()
+        img.translatesAutoresizingMaskIntoConstraints = false
+        img.clipsToBounds = true
+        return img
+    }()
     
     var locationTitle: UILabel = {
         let location = UILabel()
@@ -94,12 +99,17 @@ class TodayForecastViewController: UIViewController, TodayForecastViewProtocol {
         stackView.spacing = 10
         view.addSubview(stackView)
         
+        view.addSubview(wetherImage)
+        wetherImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
+        wetherImage.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        wetherImage.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        wetherImage.widthAnchor.constraint(equalToConstant: 100).isActive = true
         let imageName = "?"
         let image = UIImage(named: imageName)
-        wetherImage = UIImageView(image: image!)
+        wetherImage.image = image
         
-        wetherImage.frame = CGRect(x: (view.frame.width / 2) - 50, y: 100, width: 100, height: 100)
-        view.addSubview(wetherImage)
+        //wetherImage.frame = CGRect(x: (view.frame.width / 2) - 50, y: 100, width: 100, height: 100)
+        
         
         stackView.topAnchor.constraint(equalTo: wetherImage.bottomAnchor, constant: 14).isActive = true
         stackView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
@@ -216,9 +226,9 @@ class TodayForecastViewController: UIViewController, TodayForecastViewProtocol {
     
     func failure(error: Error) {
         print(error.localizedDescription)
-        let errorMessage = UIAlertController(title: "Connection error", message: "Please connect to the Internet and restart the application", preferredStyle: .alert)
-        let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
-            exit(1)
+        let errorMessage = UIAlertController(title: "Connection error", message: "Please connect to the Internet. After pressing \"Ok\" button, application will try to connect again", preferredStyle: .alert)
+        let ok = UIAlertAction(title: "OK", style: .cancel, handler: { (action) -> Void in
+            self.presenter.getForecast()
          })
         
         errorMessage.addAction(ok)
@@ -228,10 +238,13 @@ class TodayForecastViewController: UIViewController, TodayForecastViewProtocol {
     
     func ImageSucces(image: UIImage?) {
         if image != nil {
-            if  wetherImage == nil {
-                wetherImage = UIImageView(image: image!)
-                wetherImage.frame = CGRect(x: (view.frame.width / 2) - 50, y: 100, width: 100, height: 100)
+            if wetherImage.superview != self.view {
                 view.addSubview(wetherImage)
+                wetherImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
+                wetherImage.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+                wetherImage.heightAnchor.constraint(equalToConstant: 100).isActive = true
+                wetherImage.widthAnchor.constraint(equalToConstant: 100).isActive = true
+                wetherImage.image = image
             } else {
                 wetherImage.image = image!
             }

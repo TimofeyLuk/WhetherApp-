@@ -18,6 +18,13 @@ class WeekForecastViewController: UIViewController, UITableViewDelegate, UITable
         return forecast
     }()
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if presenter.forecast == nil {
+            presenter.getForecast()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Forecast"
@@ -30,6 +37,7 @@ class WeekForecastViewController: UIViewController, UITableViewDelegate, UITable
         forecastTable.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         forecastTable.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         forecastTable.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        forecastTable.reloadData()
     }
     
     
@@ -113,9 +121,9 @@ class WeekForecastViewController: UIViewController, UITableViewDelegate, UITable
     
     func failure(error: Error) {
         print(error.localizedDescription)
-        let errorMessage = UIAlertController(title: "Connection error", message: "Please connect to the Internet and restart the application", preferredStyle: .alert)
-        let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
-            exit(1)
+        let errorMessage = UIAlertController(title: "Connection error", message: "Please connect to the Internet. After pressing \"Ok\" button, application will try to connect again", preferredStyle: .alert)
+        let ok = UIAlertAction(title: "OK", style: .cancel, handler: { (action) -> Void in
+            self.presenter.getForecast()
          })
         
         errorMessage.addAction(ok)

@@ -10,7 +10,12 @@ import UIKit
 
 class ForecastCell: UITableViewCell {
 
-    var weatherImage: UIImageView!
+    var weatherImage: UIImageView = {
+        let img = UIImageView()
+        img.translatesAutoresizingMaskIntoConstraints = false
+        img.clipsToBounds = true
+        return img
+    }()
     var timeLable: UILabel = {
         let time = UILabel()
         time.translatesAutoresizingMaskIntoConstraints = false
@@ -36,29 +41,30 @@ class ForecastCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        weatherImage = UIImageView()
-        
-        timeLable.frame = CGRect(x: 90, y: 35, width: 100, height: 15)
-        //timeLable.text = "time"
-        
-        weatherDescriptionsLabel.frame = CGRect(x: 90, y: 60, width: 200, height: 12)
-        //weatherDescriptionsLabel.text = "weather descriptions"
-        
-        tempLapel.frame = CGRect(x: 270, y: 4, width: 120, height: 100)
-        //tempLapel.text = "00°C"
-        
-        weatherImage.frame = CGRect(x: 15, y: 15, width: 70, height: 70)
-        
         self.addSubview(weatherImage)
         self.addSubview(timeLable)
         self.addSubview(weatherDescriptionsLabel)
         self.addSubview(tempLapel)
         
+        weatherImage.leftAnchor.constraint(equalTo: self.contentView.leftAnchor, constant: 7).isActive = true
+        weatherImage.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 7).isActive = true
+        weatherImage.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        weatherImage.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        
+        timeLable.leftAnchor.constraint(equalTo: weatherImage.rightAnchor, constant: 20).isActive = true
+        timeLable.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 25).isActive = true
+        
+        weatherDescriptionsLabel.leftAnchor.constraint(equalTo: weatherImage.rightAnchor, constant: 20).isActive = true
+        weatherDescriptionsLabel.topAnchor.constraint(equalTo: timeLable.bottomAnchor, constant: 5).isActive = true
+        
+        tempLapel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 25).isActive = true
+        tempLapel.leftAnchor.constraint(equalTo: self.contentView.leftAnchor, constant: self.contentView.frame.width - 50).isActive = true
+        //tempLapel.leftAnchor.constraint(equalTo: self.contentView.rightAnchor, constant: -100).isActive = true
+
     }
-    
+        
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: coder)
     }
     
     override func awakeFromNib() {
